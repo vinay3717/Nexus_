@@ -1,0 +1,84 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Environment files
+.env
+.env.*
+
+# Package installers
+pip-wheel-metadata/
+*.egg-info/
+.eggs/
+
+# Distribution / packaging
+build/
+dist/
+
+# Testing
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+htmlcov/
+
+# MyPy
+.mypy_cache/
+.dmypy.json
+.dmypy
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# SQLite databases
+*.sqlite
+*.sqlite3
+checkpoints.sqlite
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Python bytecode
+*.pyc
+*.pyo
+*.pyd
+
+# Local project files
+.python-version
+
+# Coverage reports
+htmlcov/
+coverage.xml
+
+# JetBrains
+.idea/
+
+# Node modules (if present accidentally)
+node_modules/
+
+# UV / pipx local artifacts
+.uv/
+setup_feature1.sh
+*.sql
