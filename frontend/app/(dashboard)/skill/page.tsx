@@ -15,7 +15,7 @@ const PRESET_SKILLS = [
   { id: "devops",       label: "DevOps",             icon: "🔧", description: "CI/CD, containers, cloud infrastructure" },
 ];
 
-const MAX_SKILLS = 5;
+const MAX_SKILLS = 1;
 
 export default function SkillSelectionPage() {
   const router = useRouter();
