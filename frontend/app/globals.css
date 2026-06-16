@@ -1,0 +1,386 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --color-bg:             #0A0E1A;
+  --color-surface:        #121828;
+  --color-surface-raised: #1C2438;
+  --color-surface-locked: #0E1220;
+  --color-brand:          #6C63FF;
+  --color-brand-dim:      #3D38B0;
+  --color-brand-glow:     rgba(108, 99, 255, 0.18);
+  --color-success:        #2DD4A0;
+  --color-success-dim:    rgba(45, 212, 160, 0.12);
+  --color-warn:           #F5A623;
+  --color-warn-dim:       rgba(245, 166, 35, 0.12);
+  --color-danger:         #FF4F6D;
+  --color-danger-dim:     rgba(255, 79, 109, 0.12);
+  --color-text-primary:   #EEF0F8;
+  --color-text-secondary: #7B849E;
+  --color-text-muted:     #4A5168;
+  --color-text-inverse:   #0A0E1A;
+  --color-border:         #242D45;
+  --color-border-focus:   #6C63FF;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body:    'Inter', system-ui, sans-serif;
+  --font-mono:    'JetBrains Mono', 'Fira Mono', monospace;
+  --radius-sm:   6px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-full: 9999px;
+  --shadow-card:         0 2px 8px rgba(0,0,0,0.32);
+  --shadow-card-hover:   0 4px 20px rgba(108, 99, 255, 0.20);
+  --shadow-modal:        0 16px 48px rgba(0,0,0,0.64);
+  --shadow-glow:         0 0 0 3px rgba(108, 99, 255, 0.30);
+  --shadow-glow-success: 0 0 0 3px rgba(45, 212, 160, 0.30);
+  --shadow-glow-danger:  0 0 0 3px rgba(255, 79, 109, 0.30);
+  --transition-fast:   120ms ease;
+  --transition-normal: 200ms ease;
+  --transition-slow:   350ms ease;
+  --transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background:  var(--color-bg);
+  color:       var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+/* ── Roadmap Overview Page ─────────────────────────────────────── */
+
+.roadmap-page {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+.roadmap-page--error {
+  text-align: center;
+  padding-top: 4rem;
+}
+
+.roadmap-page__eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-tertiary, #888);
+  margin-bottom: 0.25rem;
+}
+
+.roadmap-page__title {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.roadmap-page__subtitle {
+  font-size: 15px;
+  color: var(--color-text-secondary);
+  margin-top: 0.5rem;
+}
+
+.roadmap-page__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-top: 0.25rem;
+}
+
+.roadmap-version-badge {
+  background: #EEEDFE;
+  color: #3C3489;
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* Progress section */
+.roadmap-progress-section {
+  background: var(--color-background-secondary, #f5f5f5);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.roadmap-progress-section__info {
+  flex: 1;
+}
+
+.roadmap-progress-section__label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.4rem;
+}
+
+.roadmap-progress-section__pct {
+  font-size: 20px;
+  font-weight: 500;
+  min-width: 2.75rem;
+  text-align: right;
+}
+
+/* Regenerate widget */
+.regen-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.regen-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.regen-trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  background: none;
+  border: 0.5px solid var(--color-border-secondary, rgba(0,0,0,0.2));
+  border-radius: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex: 1;
+  white-space: nowrap;
+}
+
+.regen-trigger:hover {
+  background: var(--color-background-secondary, #f5f5f5);
+}
+
+.regen-count {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.regen-input-panel {
+  border: 0.5px solid var(--color-border-secondary, rgba(0,0,0,0.2));
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  background: var(--color-background-primary, #fff);
+}
+
+.regen-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.regen-textarea {
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.6;
+  padding: 8px 10px;
+  border: 0.5px solid var(--color-border-tertiary, rgba(0,0,0,0.15));
+  border-radius: 8px;
+  background: var(--color-background-secondary, #f5f5f5);
+  color: var(--color-text-primary);
+  resize: vertical;
+  font-family: inherit;
+}
+
+.regen-textarea:focus {
+  outline: none;
+  border-color: #534AB7;
+  box-shadow: 0 0 0 3px rgba(83,74,183,0.15);
+}
+
+.regen-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 0.75rem;
+}
+
+.regen-error {
+  font-size: 13px;
+  color: var(--color-text-danger, #c0392b);
+  margin-top: 0.5rem;
+}
+
+.regen-remaining {
+  font-size: 12px;
+  color: var(--color-text-tertiary, #aaa);
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+/* Level list */
+.level-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.level-connector {
+  width: 2px;
+  height: 16px;
+  background: var(--color-border-tertiary, rgba(0,0,0,0.12));
+  margin-left: calc(1.25rem + 16px); /* aligns with center of level-num */
+}
+
+/* Level card */
+.level-card {
+  border-radius: 12px;
+  border: 0.5px solid var(--color-border-tertiary, rgba(0,0,0,0.12));
+  background: var(--color-background-primary, #fff);
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  transition: background 0.15s;
+}
+
+.level-card--current {
+  border-color: #AFA9EC;
+  cursor: pointer;
+}
+
+.level-card--current:hover {
+  background: #EEEDFE;
+}
+
+.level-card--completed {
+  border-color: #5DCAA5;
+  cursor: pointer;
+}
+
+.level-card--completed:hover {
+  background: #E1F5EE;
+}
+
+.level-card--locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Level number bubble */
+.level-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+.level-num--current {
+  background: #EEEDFE;
+  color: #3C3489;
+}
+
+.level-num--locked {
+  background: var(--color-background-secondary, #f5f5f5);
+  color: var(--color-text-tertiary, #aaa);
+}
+
+.level-num--completed {
+  background: #E1F5EE;
+  color: #0F6E56;
+}
+
+/* Level body */
+.level-body {
+  flex: 1;
+}
+
+.level-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.level-desc {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+  margin-bottom: 0.5rem;
+}
+
+.level-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.level-status-pill {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.level-status-pill--current {
+  background: #EEEDFE;
+  color: #534AB7;
+}
+
+.level-status-pill--locked {
+  background: var(--color-background-secondary, #f5f5f5);
+  color: var(--color-text-tertiary, #aaa);
+}
+
+.level-status-pill--completed {
+  background: #E1F5EE;
+  color: #0F6E56;
+}
+
+.level-lesson-count {
+  font-size: 12px;
+  color: var(--color-text-tertiary, #aaa);
+}
+
+.level-lock {
+  color: var(--color-text-tertiary, #aaa);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+/* Misc */
+.btn-retry {
+  margin-top: 1.5rem;
+  padding: 12px 32px;
+  border-radius: 8px;
+  border: none;
+  background: var(--color-brand);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+}
+
+.btn-retry:hover {
+  background: #5652E0;
+  box-shadow: 0 4px 16px rgba(108, 99, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-retry:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(108, 99, 255, 0.2);
+}
+
+/* ── End Roadmap Overview Page ─────────────────────────────────── */
