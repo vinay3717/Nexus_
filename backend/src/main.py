@@ -13,6 +13,7 @@ FastAPI entry point for the Nexus backend.
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from src.routes.roadmap import router as roadmap_router
 
 from src.config import get_settings
 
@@ -74,3 +75,5 @@ if __name__ == "__main__":
     import uvicorn
 
     uvicorn.run("src.main:app", host="0.0.0.0", port=settings.PORT, reload=True)
+
+app.include_router(roadmap_router)

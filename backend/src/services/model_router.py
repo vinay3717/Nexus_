@@ -12,7 +12,7 @@ is unknown, falls back to MODEL_ROUTING["fallback"].
 from functools import lru_cache
 
 from langchain_google_genai import ChatGoogleGenerativeAI
-from langchain_openai import ChatOpenAI
+from langchain_nvidia_ai_endpoints import ChatNVIDIA
 
 from src.config import get_settings, MODEL_ROUTING
 
@@ -27,10 +27,10 @@ def _build_llm(model_name: str):
             google_api_key=settings.GOOGLE_API_KEY,
             temperature=0.7,
         )
-    if model_name.startswith("gpt"):
-        return ChatOpenAI(
+    if model_name.startswith("meta/llama"):  # fixed: was "metar/llama"
+        return ChatNVIDIA(
             model=model_name,
-            api_key=settings.OPENAI_API_KEY,
+            nvidia_api_key=settings.NVIDIA_API_KEY,
             temperature=0.7,
         )
     raise ValueError(f"Unknown model name in MODEL_ROUTING: {model_name}")

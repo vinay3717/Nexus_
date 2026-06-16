@@ -30,7 +30,7 @@ class Settings(BaseSettings):
     POSTGRES_URL: str = ""
     # --- LLM providers ---
     GOOGLE_API_KEY: str = ""
-    OPENAI_API_KEY: str = ""
+    NVIDIA_API_KEY: str = ""
     # --- LangSmith / LangChain tracing ---
     LANGCHAIN_TRACING_V2: bool = False
     LANGCHAIN_PROJECT: str = "nexus-dev"
@@ -58,9 +58,9 @@ def get_settings() -> Settings:
 # To change which model handles a task: edit the string value here only.
 # ---------------------------------------------------------------------------
 MODEL_ROUTING: dict[str, str] = {
-    "roadmap_generation": "gemini-1.5-flash",   # long structured output + Pydantic
-    "quiz_generation": "gpt-4o-mini",           # creative variation, fast
-    "gap_analysis": "gemini-1.5-pro",           # reasoning over test_history
-    "email_content": "gpt-4o-mini",             # tone + writing quality
-    "fallback": "gpt-4o-mini",                  # if any primary model is down
+    "roadmap_generation": "gemini-3.5-flash",   # long structured output + Pydantic
+    "quiz_generation": "meta/llama-3.3-70b-instruct",           # creative variation, fast
+    "gap_analysis": "gemini-3.5-flash",           # reasoning over test_history
+    "email_content": "meta/llama-3.3-70b-instruct",             # tone + writing quality
+    "fallback": "meta/llama-3.3-70b-instruct",                  # if any primary model is down
 }

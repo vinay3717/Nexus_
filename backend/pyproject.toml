@@ -19,6 +19,7 @@ dependencies = [
     "langgraph-checkpoint-sqlite>=1.0.0",
     "langgraph-checkpoint-postgres>=1.0.0",
     "python-dotenv>=1.0.1",
+    "langchain-nvidia-ai-endpoints>=0.3.19",
 ]
 
 [project.optional-dependencies]
