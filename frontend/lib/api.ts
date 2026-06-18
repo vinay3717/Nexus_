@@ -84,9 +84,7 @@ export interface GateTestResult {
   concept_gaps: string[];
 }
 
-export interface SublevelDecision {
-  decision: "accept" | "challenge" | "reassess" | "microlesson";
-}
+export type SublevelDecision = "accept" | "reject" | "challenge" | "reassess" | "microlesson";
 
 export interface SublevelResponse {
   sublevel_reject_count: number;
@@ -247,24 +245,19 @@ export async function regenerateRoadmap(id: string, feedback: string) {
   // Real: return fetch(`/roadmap/${id}/regenerate`, { method: "POST", body: JSON.stringify({ feedback }) })
 }
 
+// Mock — returns immediately so SubLevelModal works without a live backend
 export async function submitSublevelDecision(
   decision: SublevelDecision
-): Promise<SublevelResponse> {
-  if (decision.decision === "accept") {
-    return {
-      sublevel_reject_count: 0,
-      next_action: "sublevel_content",
-      mini_roadmap: {
-        title: "Closing Your Gaps: Lists & Dicts",
-        lessons: [
-          { title: "List Comprehensions", description: "Write concise list transforms in one line." },
-          { title: "Dictionary Methods", description: "keys(), values(), items(), get(), and update()." },
-          { title: "Mini-project", description: "Refactor a script using comprehensions and dict methods." },
-        ],
-      },
-    };
-  }
-  return { sublevel_reject_count: 1, next_action: "gate_test_retry" };
+): Promise<{ success: boolean; next_action: string }> {
+  await new Promise((r) => setTimeout(r, 400)); // simulate network
+  const nextActionMap: Record<SublevelDecision, string> = {
+    accept: "sublevel_active",
+    reject: "gate_test_retry",
+    challenge: "challenge_mode",
+    reassess: "reassess",
+    microlesson: "microlesson",
+  };
+  return { success: true, next_action: nextActionMap[decision] };
 }
 
 

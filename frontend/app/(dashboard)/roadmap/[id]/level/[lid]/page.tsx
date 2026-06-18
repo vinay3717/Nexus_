@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import Card from "@/components/ui/Card";
 import ProgressBar from "@/components/ui/ProgressBar";
 import GateTest from "@/components/features/GateTest";
+import SubLevelModal, { type SublevelSuggestion } from "@/components/features/SubLevelModal";
 
 // ---------------------------------------------------------------------------
 // Mock roadmap data — replace with api.getRoadmap(id) once backend is live
@@ -523,14 +524,21 @@ export default function LevelContentPage() {
 
   const [readLessons, setReadLessons] = useState<Set<string>>(new Set());
   const [showGateTest, setShowGateTest] = useState(false);
-  const [testResult, setTestResult] = useState<{ score: number; passed: boolean } | null>(null);
   const [showSublevel, setShowSublevel] = useState(false);
+  const [sublevelRejectCount, setSublevelRejectCount] = useState(0);
 
   const lessonRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const sublevelSuggestion: SublevelSuggestion = {
+    title: `${level.title}: targeted review`,
+    description:
+      "A short focused lesson for the concepts that caused the gate test miss.",
+    lessonCount: 3,
+    conceptGaps: ["lists", "dictionaries", "control flow"],
+  };
 
   function handleTestResult(score: number, passed: boolean) {
-    setTestResult({ score, passed });
     if (!passed) {
+      setSublevelRejectCount(0);
       setShowSublevel(true);
     } else {
       router.push(`/roadmap/${roadmapId}`);
@@ -799,8 +807,29 @@ export default function LevelContentPage() {
             concept_tag: lesson.id.split("-")[0],
           }))}
           onResult={handleTestResult}
+          onSubLevel={() => setShowSublevel(true)}
         />
       )}
+
+      <SubLevelModal
+        isOpen={showSublevel}
+        suggestion={sublevelSuggestion}
+        rejectCount={sublevelRejectCount}
+        onDecision={(decision) => {
+          if (decision === "accept") {
+            router.push(`/roadmap/${roadmapId}/level/${levelIndex}/sublevel`);
+            return;
+          }
+
+          if (decision === "reject") {
+            setSublevelRejectCount((count) => count + 1);
+            setShowSublevel(false);
+            return;
+          }
+
+          setShowSublevel(false);
+        }}
+      />
     </div>
   );
 }
